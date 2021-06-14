@@ -1,0 +1,34 @@
+{{#if this.settings}}
+  <div class="w-screen h-screen m-0 p-0">
+    <div class="absolute flex" style={{this.profileMarginStyle}}>
+      <Ui::FadeIn class="absolute top-0 left-0">
+        <Widgets::DateTime />
+      </Ui::FadeIn>
+      <div class="absolute bottom-0 left-0 flex space-x-20 h-96">
+        <Ui::FadeIn>
+          <Widgets::Events @maxEvents={{10}} class="max-w-xs" />
+        </Ui::FadeIn>
+        <Ui::FadeIn>
+          <Widgets::Tasks @maxTasks={{10}} class="max-w-xs" />
+        </Ui::FadeIn>
+      </div>
+      <Ui::FadeIn class="absolute top-0 right-0">
+        <Widgets::Weather />
+      </Ui::FadeIn>
+      <Ui::FadeIn class="absolute bottom-0 right-0">
+        <Widgets::StockChart
+          class="w-120"
+          @stockSymbol={{this.settings.profile.stockSymbol}}
+        />
+      </Ui::FadeIn>
+      {{#if this.settings}}
+        <Settings
+          class="w-full h-full"
+          @settings={{this.settings}}
+          @onSave={{this.handleSettingsSave}}
+          @onUpdate={{this.handleSettingsUpdate}}
+        />
+      {{/if}}
+    </div>
+  </div>
+{{/if}}

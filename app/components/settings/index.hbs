@@ -1,0 +1,43 @@
+<div class="flex" ...attributes {{on 'mousemove' this.mouseMoved}}>
+  <button
+    class="bg-white m-auto text-black p-2 transition-opacity
+      {{if this.showSettingsButton 'opacity-75' 'opacity-0'}}"
+    {{on 'click' this.showSettings}}
+  >
+    Settings
+  </button>
+  {{#if this.showSettingsModal}}
+    <div
+      class="fixed top-0 left-0 right-0 bottom-0 bg-black opacity-50 z-10"
+    ></div>
+    <div
+      id="settings-backdrop"
+      class="fixed flex top-0 left-0 right-0 bottom-0 z-20"
+      {{on 'mousedown' this.handleClose}}
+    >
+      <div
+        class="bg-white p-10 h-fit w-fit m-auto"
+        {{on 'mousedown' this.stopPropogation}}
+      >
+        <h1 class="text-black">
+          Settings
+        </h1>
+        {{#if this.profile}}
+          <Settings::Profile
+            @profile={{this.profile}}
+            @onProfileChange={{action (mut this.profile)}}
+          />
+        {{/if}}
+        <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+          <button
+            type="button"
+            class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-500 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm"
+            {{on 'click' this.handleConfirm}}
+          >
+            Confirm
+          </button>
+        </div>
+      </div>
+    </div>
+  {{/if}}
+</div>

@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import 'ember-modal-dialog/ember-modal-structure.css';
+@import 'ember-modal-dialog/ember-modal-appearance.css';
+
+body {
+  font-family: 'Roboto', sans-serif;
+  color: white;
+  background-color: black;
+}
+
+.animation-fill-forward {
+  animation-fill-mode: forwards;
+}

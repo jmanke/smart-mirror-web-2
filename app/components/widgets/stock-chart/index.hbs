@@ -1,0 +1,28 @@
+<div ...attributes>
+  {{#if this.connected}}
+    <div class="pl-4 pr-2">
+      <div class="flex">
+        <p class="text-2xl mt-auto">
+          {{this.currentPrice}}
+          <span class="text-xs">
+            USD
+          </span>
+        </p>
+        <p class="text-md mt-auto ml-auto">
+          NYSE:
+          <span class="pl-1" {{did-update this.updateChart @stockSymbol}}>
+            {{@stockSymbol}}
+          </span>
+        </p>
+      </div>
+      <p class="text-xs">
+        {{this.stockDate}}
+      </p>
+    </div>
+  {{else}}
+    <p>
+      Stock prices lost connection...
+    </p>
+  {{/if}}
+  <div {{did-insert this.createChart}}></div>
+</div>

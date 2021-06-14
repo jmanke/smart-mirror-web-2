@@ -1,0 +1,28 @@
+<div ...attributes>
+  <Ui::Title class="pb-6">
+    Tasks
+  </Ui::Title>
+  {{#if this.isConnected}}
+    <div class="grid gap-y-2">
+      {{#if this.anyItems}}
+        {{#each this.items as |task index|}}
+          <Ui::FadeInListItem
+            delay={{200}}
+            currIndex={{index}}
+            listLength={{this.tasksLength}}
+          >
+            {{task.title}}
+          </Ui::FadeInListItem>
+        {{/each}}
+      {{else}}
+        <Ui::FadeIn>
+          No tasks...
+        </Ui::FadeIn>
+      {{/if}}
+    </div>
+  {{else}}
+    <p>
+      Lost connection...
+    </p>
+  {{/if}}
+</div>

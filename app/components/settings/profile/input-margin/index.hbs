@@ -1,0 +1,9 @@
+<input
+  class="border border-gray-500 pl-1"
+  type="number"
+  min="0"
+  defaultValue={{this.margin}}
+  step="1"
+  required
+  {{on 'change' (action this.handleValueChange value='target.value')}}
+/>

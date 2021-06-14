@@ -1,0 +1,18 @@
+<div class="grid grid-cols-3 items-center" ...attributes>
+  <p>
+    {{weekday-long @dailyForecast.date}}
+  </p>
+  <img
+    class="h-8 m-auto"
+    src={{@dailyForecast.icon}}
+    alt={{@dailyForecast.condition}}
+  />
+  <div class="grid grid-cols-2 ml-10 text-right">
+    <p>
+      {{temp @dailyForecast.maxTemp}}
+    </p>
+    <p class="opacity-60">
+      {{temp @dailyForecast.minTemp}}
+    </p>
+  </div>
+</div>

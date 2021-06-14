@@ -1,0 +1,41 @@
+<div ...attributes>
+  <Ui::Title class="pb-6">
+    Upcoming Events
+  </Ui::Title>
+  <div class="grid grid-cols-2 gap-x-4 gap-y-2">
+    {{#if this.isConnected}}
+      {{#if this.anyItems}}
+        {{#each this.items as |event index|}}
+          <Ui::FadeInListItem
+            @currIndex={{index}}
+            @listLength={{this.eventsLength}}
+            @delay={{200}}
+            class="col-start-1 col-end-9"
+          >
+            <p class="whitespace-nowrap overflow-hidden overflow-ellipsis">
+              {{event.summary}}
+            </p>
+          </Ui::FadeInListItem>
+          <Ui::FadeInListItem
+            @currIndex={{index}}
+            @listLength={{this.itemsLength}}
+            @delay={{200}}
+            class="col-start-10 col-end-13"
+          >
+            <p class="text-right">
+              {{am-pm-time event.start.dateTime}}
+            </p>
+          </Ui::FadeInListItem>
+        {{/each}}
+      {{else}}
+        <p class="whitespace-nowrap overflow-hidden overflow-ellipsis">
+          No events...
+        </p>
+      {{/if}}
+    {{else}}
+      <p>
+        Lost Connection...
+      </p>
+    {{/if}}
+  </div>
+</div>
