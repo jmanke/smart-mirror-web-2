@@ -25,31 +25,26 @@ export default class AutoUpdater extends Service {
     )?.content;
 
     // check for updates
-    this.heartBeat = this.heartBeatService.startHeartbeat(
-      this.checkForUpdate.bind(this),
-      UPDATE_INTERVAL
-    );
-  }
+    this.heartBeat = this.heartBeatService.startHeartbeat(() => {
+      this.apiService
+        .getRequest(window.location.href)
+        .then((res: any) => {
+          const re = /<meta name="build-version" content="(.*?)".*?\/>/;
+          const matches = res.match(re);
 
-  checkForUpdate() {
-    this.apiService
-      .getRequest(window.location.href)
-      .then((res: any) => {
-        const re = /<meta name="build-version" content="(.*?)".*?\/>/;
-        const matches = res.match(re);
+          if (matches && matches.length === 2) {
+            const buildVersion = matches[1];
 
-        if (matches && matches.length === 2) {
-          const buildVersion = matches[1];
-
-          if (this.currentBuildVersion !== buildVersion) {
-            window.location.reload();
+            if (this.currentBuildVersion !== buildVersion) {
+              window.location.reload();
+            }
           }
-        }
-      })
-      .catch((e: any) => {
-        console.error('Could not reach ' + window.location.href);
-        console.error(e);
-      });
+        })
+        .catch((e: any) => {
+          console.error('Could not reach ' + window.location.href);
+          console.error(e);
+        });
+    }, UPDATE_INTERVAL);
   }
 }
 

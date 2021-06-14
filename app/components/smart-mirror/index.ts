@@ -6,6 +6,7 @@ import { tracked } from '@glimmer/tracking';
 import StoreService from 'smart-mirror-desktop/services/store-service';
 import { htmlSafe } from '@ember/string';
 import { wait } from 'smart-mirror-desktop/utils/utils';
+import AutoUpdater from 'smart-mirror-desktop/services/auto-updater';
 
 interface SmartMirrorArgs {
   onSave: () => void;
@@ -14,6 +15,7 @@ interface SmartMirrorArgs {
 
 export default class SmartMirror extends Component<SmartMirrorArgs> {
   @service declare storeService: StoreService;
+  @service declare autoUpdater: AutoUpdater;
 
   @tracked
   settings: Settings | undefined | null;
@@ -43,6 +45,7 @@ export default class SmartMirror extends Component<SmartMirrorArgs> {
       }
 
       this.settings = await this.storeService.getAppSettings();
+      this.autoUpdater.startCheckingForUpdates();
 
       if (!this.settings) {
         const defaultSettings: Settings = {
