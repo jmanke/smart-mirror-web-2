@@ -51,8 +51,13 @@ export default class WidgetsStockChartIndex extends Component<WidgetsStockChartI
       return;
     }
 
-    const lastStock = this.stockPrices[this.stockPrices.length - 1];
-    this.currentPrice = lastStock.close;
+    // set current price to last known close value. API can return null close values
+    for (let i = this.stockPrices.length - 1; i >= 0; i--) {
+      if (this.stockPrices[i].close) {
+        this.currentPrice = this.stockPrices[i].close;
+        break;
+      }
+    }
 
     const stockDateTime = DateTime.fromISO(this.stockPrices[0].date);
     this.stockDate = getFormattedDate(stockDateTime.toJSDate());
