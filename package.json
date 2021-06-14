@@ -11,7 +11,7 @@
     "test": "tests"
   },
   "scripts": {
-    "build": "ember build --environment=production && EMBERBUILDVERSION=$(date +%Y-%m-%d)-$(date +%T) && sed -i -- 's/%EMBERBUILDVERSION%/'$EMBERBUILDVERSION'/g' dist/index.html && echo Ember Build Version = $EMBERBUILDVERSION",
+    "build": "ember build --environment=production",
     "lint": "npm-run-all --aggregate-output --continue-on-error --parallel 'lint:!(fix)'",
     "lint:fix": "npm-run-all --aggregate-output --continue-on-error --parallel lint:*:fix",
     "lint:hbs": "ember-template-lint .",
