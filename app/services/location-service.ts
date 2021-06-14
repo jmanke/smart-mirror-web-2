@@ -1,5 +1,5 @@
 import Service, { inject as service } from '@ember/service';
-import Api from './api-service';
+import Api, { LOCAL_SERVER_URL } from './api-service';
 
 export interface Location {
   longitude: string;
@@ -14,7 +14,7 @@ export default class LocationService extends Service {
   async getLocation() {
     if (!this.location) {
       this.location = await this.apiService.getRequest(
-        'https://geolocation-db.com/json/'
+        `${LOCAL_SERVER_URL}/location/current`
       );
     }
 

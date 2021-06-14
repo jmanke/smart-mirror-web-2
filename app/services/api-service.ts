@@ -1,6 +1,8 @@
 import Service from '@ember/service';
 import axios from 'axios';
 
+export const LOCAL_SERVER_URL = 'http://localhost:5001';
+
 export default class ApiService extends Service {
   async getRequest<T>(url: string): Promise<T | null> {
     return axios.get<T>(url).then((response) => {

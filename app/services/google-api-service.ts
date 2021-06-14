@@ -1,5 +1,5 @@
 import Service, { inject as service } from '@ember/service';
-import ApiService from './api-service';
+import ApiService, { LOCAL_SERVER_URL } from './api-service';
 
 export interface GetEventsProps {
   maxResults?: number;
@@ -10,8 +10,6 @@ export interface GetEventsProps {
 export interface GetTasksProps {
   maxResults?: number;
 }
-
-const BASE_URL = 'http://localhost:5001';
 
 export default class GoogleApiService extends Service {
   @service declare apiService: ApiService;
@@ -27,7 +25,9 @@ export default class GoogleApiService extends Service {
       params.append('timeMax', timeMax.toISOString());
     }
 
-    return this.apiService.getRequest<[]>(`${BASE_URL}/gapi/events?${params}`);
+    return this.apiService.getRequest<[]>(
+      `${LOCAL_SERVER_URL}/gapi/events?${params}`
+    );
   }
 
   async getTasks({ maxResults = 10 }: GetEventsProps) {
@@ -35,7 +35,9 @@ export default class GoogleApiService extends Service {
       maxResults: maxResults.toString(),
     });
 
-    return this.apiService.getRequest<[]>(`${BASE_URL}/gapi/tasks?${params}`);
+    return this.apiService.getRequest<[]>(
+      `${LOCAL_SERVER_URL}/gapi/tasks?${params}`
+    );
   }
 }
 
