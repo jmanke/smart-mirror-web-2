@@ -120,7 +120,7 @@ export default class WidgetsWeatherIndex extends Component<WidgetsWeatherIndexAr
           }
 
           this.dailyForecast = dailyForecast.daily
-            .slice(0, FORECAST_NUM)
+            .slice(1, FORECAST_NUM + 1)
             .map((d: any) => this.mapDailyWeatherData(d));
         },
         1000 * 60 * 60,
