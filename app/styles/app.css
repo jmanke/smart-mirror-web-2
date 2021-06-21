@@ -5,6 +5,10 @@
 @import 'ember-modal-dialog/ember-modal-structure.css';
 @import 'ember-modal-dialog/ember-modal-appearance.css';
 
+html {
+  font-size: 1.2rem;
+}
+
 body {
   font-family: 'Roboto', sans-serif;
   color: white;

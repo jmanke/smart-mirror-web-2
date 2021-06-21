@@ -47,6 +47,10 @@ export default class WidgetsStockChartIndex extends Component<WidgetsStockChartI
         IEXOnly: true,
       })) ?? [];
 
+    this.lastUpdated = DateTime.fromISO(DateTime.now().toISO(), {
+      zone: AMERICA_NEW_YORK,
+    });
+
     if (!this.stockPrices.length) {
       return;
     }
@@ -149,13 +153,16 @@ export default class WidgetsStockChartIndex extends Component<WidgetsStockChartI
           format: 'h:mm TT',
           style: {
             colors: '#ffffff',
+            fontSize: '15px',
           },
         },
       },
       yaxis: {
+        decimalsInFloat: 2,
         labels: {
           style: {
             colors: '#ffffff',
+            fontSize: '15px',
           },
         },
       },
@@ -212,7 +219,7 @@ export default class WidgetsStockChartIndex extends Component<WidgetsStockChartI
       if (this.shouldUpdateStockPrices()) {
         this.updateChart();
       }
-    }, 1000 * 60 * 10);
+    }, 1000 * 60 * 2);
   }
 
   willDestroy() {

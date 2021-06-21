@@ -2,20 +2,20 @@
   {{#if this.connected}}
     <div class="pl-4 pr-2">
       <div class="flex">
-        <p class="text-2xl mt-auto">
+        <p class="text-3xl mt-auto">
           {{currency this.currentPrice}}
-          <span class="text-xs">
+          <span class="text-sm">
             USD
           </span>
         </p>
-        <p class="text-md mt-auto ml-auto">
+        <p class="text-3xl mt-auto ml-auto">
           NYSE:
           <span class="pl-1" {{did-update this.updateChart @stockSymbol}}>
             {{@stockSymbol}}
           </span>
         </p>
       </div>
-      <p class="text-xs">
+      <p class="text-sm">
         {{this.stockDate}}
       </p>
     </div>
