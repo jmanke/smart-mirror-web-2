@@ -47,7 +47,14 @@ export default class SmartMirror extends Component<SmartMirrorArgs> {
       this.settings = await this.storeService.getAppSettings();
       this.autoUpdater.startCheckingForUpdates();
 
-      if (!this.settings) {
+      const hasAllSettings =
+        this.settings &&
+        this.settings.profile &&
+        this.settings.profile.margin &&
+        this.settings.profile.showStockWidget &&
+        this.settings.profile.stockSymbol;
+
+      if (!hasAllSettings) {
         const defaultSettings: Settings = {
           profile: {
             margin: {
@@ -57,10 +64,11 @@ export default class SmartMirror extends Component<SmartMirrorArgs> {
               right: 0,
             },
             stockSymbol: 'AMC',
+            showStockWidget: true,
           },
         };
 
-        this.settings = defaultSettings;
+        this.settings = { ...defaultSettings, ...this.settings };
         this.handleSettingsSave();
       }
     };

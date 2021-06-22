@@ -41,4 +41,11 @@ export default class SettingsProfileIndex extends Component<SettingsProfileIndex
       });
     }
   }
+
+  @action handleShowStockWidgetChange() {
+    this.args.onProfileChange?.({
+      ...this.args.profile,
+      showStockWidget: !this.args.profile.showStockWidget,
+    });
+  }
 }

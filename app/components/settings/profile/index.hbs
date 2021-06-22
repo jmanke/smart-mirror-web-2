@@ -42,5 +42,18 @@
       required
       {{on 'change' (action this.handleStockSymbolChange value='target.value')}}
     />
+    <div class="flex pt-2">
+      <input
+        class="border border-gray-500 pl-1"
+        type="checkbox"
+        value={{@profile.showStockWidget}}
+        checked={{@profile.showStockWidget}}
+        required
+        {{on 'click' (action this.handleShowStockWidgetChange)}}
+      />
+      <label class="pl-2">
+        Show Stock Widget
+      </label>
+    </div>
   </div>
 </div>

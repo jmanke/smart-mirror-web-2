@@ -15,12 +15,14 @@
       <Ui::FadeIn class="absolute top-0 right-0">
         <Widgets::Weather />
       </Ui::FadeIn>
-      <Ui::FadeIn class="absolute bottom-0 right-0">
-        <Widgets::StockChart
-          class="w-120"
-          @stockSymbol={{this.settings.profile.stockSymbol}}
-        />
-      </Ui::FadeIn>
+      {{#if this.settings.profile.showStockWidget}}
+        <Ui::FadeIn class="absolute bottom-0 right-0">
+          <Widgets::StockChart
+            class="w-120"
+            @stockSymbol={{this.settings.profile.stockSymbol}}
+          />
+        </Ui::FadeIn>
+      {{/if}}
       {{#if this.settings}}
         <Settings
           class="w-full h-full"

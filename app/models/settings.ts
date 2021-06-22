@@ -7,6 +7,7 @@ export interface Margin {
 
 export interface Profile {
   margin: Margin;
+  showStockWidget: boolean;
   stockSymbol: string;
 }
 
