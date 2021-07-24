@@ -22,6 +22,7 @@ module.exports = function (environment) {
       // when it is created
       OPEN_WEATHER_API_KEY: process.env.OPEN_WEATHER_API_KEY,
       IEX_TOKEN: process.env.IEX_TOKEN,
+      NEWS_API_KEY: process.env.NEWS_API_KEY,
     },
   };
 
