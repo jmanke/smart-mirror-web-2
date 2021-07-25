@@ -21,11 +21,11 @@
       <Ui::FadeIn class="absolute top-0 right-0">
         <Widgets::Weather />
       </Ui::FadeIn>
-      {{#if this.settings.profile.showStockWidget}}
+      {{#if this.settings.stockWidget.showStockWidget}}
         <Ui::FadeIn class="absolute bottom-0 right-0">
           <Widgets::StockChart
             class="w-120"
-            @stockSymbol={{this.settings.profile.stockSymbol}}
+            @stockSymbol={{this.settings.stockWidget.stockSymbol}}
           />
         </Ui::FadeIn>
       {{/if}}
