@@ -1,9 +1,14 @@
 {{#if this.settings}}
   <div class="w-screen h-screen m-0 p-0">
     <div class="absolute flex" style={{this.profileMarginStyle}}>
-      <Ui::FadeIn class="absolute top-0 left-0">
-        <Widgets::DateTime />
-      </Ui::FadeIn>
+      <div class="absolute top-0 left-0 flex flex-col">
+        <Ui::FadeIn>
+          <Widgets::DateTime />
+        </Ui::FadeIn>
+        <Ui::FadeIn class="mt-16" style={{this.newsWidgetStyle}}>
+          <Widgets::BreakingNews />
+        </Ui::FadeIn>
+      </div>
       {{! Disabled google api widget until app is verified }}
       {{!-- <div class="absolute bottom-0 left-0 flex space-x-20 h-96">
         <Ui::FadeIn>
@@ -16,11 +21,11 @@
       <Ui::FadeIn class="absolute top-0 right-0">
         <Widgets::Weather />
       </Ui::FadeIn>
-      {{#if this.settings.profile.showStockWidget}}
+      {{#if this.settings.stockWidget.showStockWidget}}
         <Ui::FadeIn class="absolute bottom-0 right-0">
           <Widgets::StockChart
             class="w-120"
-            @stockSymbol={{this.settings.profile.stockSymbol}}
+            @stockSymbol={{this.settings.stockWidget.stockSymbol}}
           />
         </Ui::FadeIn>
       {{/if}}

@@ -1,0 +1,10 @@
+<div ...attributes>
+  {{#if this.currentNewsItem}}
+    <Ui::FadeIn>
+      <Widgets::BreakingNews::NewsItem
+        @title={{this.currentNewsItem.title}}
+        @description={{this.currentNewsItem.description}}
+      />
+    </Ui::FadeIn>
+  {{/if}}
+</div>

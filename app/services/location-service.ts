@@ -4,6 +4,9 @@ import Api, { LOCAL_SERVER_URL } from './api-service';
 export interface Location {
   longitude: string;
   latitude: string;
+  city: string;
+  state: string;
+  country_code: string;
 }
 
 export default class LocationService extends Service {

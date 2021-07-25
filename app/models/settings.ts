@@ -5,14 +5,23 @@ export interface Margin {
   bottom: number;
 }
 
-export interface Profile {
+export interface Layout {
   margin: Margin;
+}
+
+export interface StockWidget {
   showStockWidget: boolean;
   stockSymbol: string;
 }
 
+export interface NewsWidget {
+  width: number;
+}
+
 export interface Settings {
-  profile: Profile;
+  layout: Layout;
+  stockWidget: StockWidget;
+  newsWidget: NewsWidget;
 }
 
 // DO NOT DELETE: this is how TypeScript knows how to look up your models.

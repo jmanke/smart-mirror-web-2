@@ -1,6 +1,6 @@
-<div class="flex" ...attributes {{on 'mousemove' this.mouseMoved}}>
+<div class="flex text-black" ...attributes {{on 'mousemove' this.mouseMoved}}>
   <button
-    class="bg-white m-auto text-black p-2 transition-opacity
+    class="bg-white m-auto p-2 transition-opacity
       {{if this.showSettingsButton 'opacity-75' 'opacity-0'}}"
     {{on 'click' this.showSettings}}
   >
@@ -16,26 +16,47 @@
       {{on 'mousedown' this.handleClose}}
     >
       <div
-        class="bg-white p-10 h-fit w-fit m-auto"
+        class="bg-white p-2 m-auto flex h-96"
         {{on 'mousedown' this.stopPropogation}}
       >
-        <h1 class="text-black">
-          Settings
-        </h1>
-        {{#if this.profile}}
-          <Settings::Profile
-            @profile={{this.profile}}
-            @onProfileChange={{action (mut this.profile)}}
-          />
-        {{/if}}
-        <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-          <button
-            type="button"
-            class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-500 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm"
-            {{on 'click' this.handleConfirm}}
-          >
-            Confirm
-          </button>
+        <Ui::TabGroup
+          class="pr-3 border-r-2 border-gray-300"
+          @options={{this.tabOptions}}
+          @selectedTab={{this.selectedTab}}
+          @selectedTabUpdate={{fn (mut this.selectedTab)}}
+        />
+        <div class="ml-2 flex flex-col overflow-auto">
+          <div class="flex flex-col overflow-auto">
+            {{#if @settings}}
+              {{#if (eq this.selectedTab 'Layout')}}
+                <Settings::LayoutSettings
+                  @layout={{@settings.layout}}
+                  @onLayoutChange={{this.updateLayout}}
+                />
+              {{/if}}
+              {{#if (eq this.selectedTab 'Stocks')}}
+                <Settings::StockSettings
+                  @stockWidget={{@settings.stockWidget}}
+                  @onUpdateStockWidget={{this.updateStockWidget}}
+                />
+              {{/if}}
+              {{#if (eq this.selectedTab 'News')}}
+                <Settings::NewsSettings
+                  @newsWidget={{@settings.newsWidget}}
+                  @onUpdateNewsWidget={{this.updateNewsWidget}}
+                />
+              {{/if}}
+            {{/if}}
+          </div>
+          <div class="ml-auto mt-auto">
+            <button
+              type="button"
+              class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-500 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm"
+              {{on 'click' this.handleConfirm}}
+            >
+              Confirm
+            </button>
+          </div>
         </div>
       </div>
     </div>

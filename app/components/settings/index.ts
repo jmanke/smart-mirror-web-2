@@ -1,7 +1,12 @@
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
-import { Settings, Profile } from 'smart-mirror-desktop/models/settings';
+import {
+  Settings,
+  Layout,
+  StockWidget,
+  NewsWidget,
+} from 'smart-mirror-desktop/models/settings';
 
 interface SettingsIndexArgs {
   settings: Settings;
@@ -11,20 +16,34 @@ interface SettingsIndexArgs {
 }
 
 export default class SettingsIndex extends Component<SettingsIndexArgs> {
-  @tracked
-  showSettingsButton = false;
-  @tracked
-  showSettingsModal = false;
-  prevProfile: Profile | undefined;
+  @tracked showSettingsButton = false;
+  @tracked showSettingsModal = false;
+  @tracked selectedTab = 'Layout';
 
-  get profile() {
-    return this.args.settings.profile;
-  }
+  prevSettings: Settings | undefined;
+  tabOptions = [{ label: 'Layout' }, { label: 'Stocks' }, { label: 'News' }];
 
-  set profile(profile: Profile) {
+  @action
+  updateLayout(layout: Layout) {
     this.args.onUpdate?.({
       ...this.args.settings,
-      profile,
+      layout,
+    });
+  }
+
+  @action
+  updateStockWidget(stockWidget: StockWidget) {
+    this.args.onUpdate?.({
+      ...this.args.settings,
+      stockWidget,
+    });
+  }
+
+  @action
+  updateNewsWidget(newsWidget: NewsWidget) {
+    this.args.onUpdate?.({
+      ...this.args.settings,
+      newsWidget,
     });
   }
 
@@ -41,7 +60,7 @@ export default class SettingsIndex extends Component<SettingsIndexArgs> {
 
   @action
   async showSettings() {
-    this.prevProfile = { ...this.args.settings.profile };
+    this.prevSettings = { ...this.args.settings };
 
     this.showSettingsModal = true;
     this.showSettingsButton = false;

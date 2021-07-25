@@ -21,18 +21,24 @@ export default class SmartMirror extends Component<SmartMirrorArgs> {
   settings: Settings | undefined | null;
 
   get topMargin() {
-    return `top-${this.settings?.profile.margin.top}`;
+    return `top-${this.settings?.layout.margin.top}`;
   }
 
   get profileMarginStyle() {
-    const top = `top: ${this.settings?.profile.margin.top}px`;
-    const right = `right: ${this.settings?.profile.margin.right}px`;
-    const left = `left: ${this.settings?.profile.margin.left}px`;
-    const bottom = `bottom: ${this.settings?.profile.margin.bottom}px`;
+    const top = `top: ${this.settings?.layout.margin.top}px`;
+    const right = `right: ${this.settings?.layout.margin.right}px`;
+    const left = `left: ${this.settings?.layout.margin.left}px`;
+    const bottom = `bottom: ${this.settings?.layout.margin.bottom}px`;
 
     const style = `${top}; ${right}; ${left}; ${bottom}`;
 
     return htmlSafe(style);
+  }
+
+  get newsWidgetStyle() {
+    const width = `width: ${this.settings?.newsWidget.width}px`;
+
+    return htmlSafe(width);
   }
 
   constructor(owner: any, args: SmartMirrorArgs) {
@@ -49,22 +55,28 @@ export default class SmartMirror extends Component<SmartMirrorArgs> {
 
       const hasAllSettings =
         this.settings &&
-        this.settings.profile &&
-        this.settings.profile.margin &&
-        this.settings.profile.showStockWidget &&
-        this.settings.profile.stockSymbol;
+        this.settings.layout &&
+        this.settings.layout.margin &&
+        this.settings.stockWidget.showStockWidget &&
+        this.settings.stockWidget.stockSymbol &&
+        this.settings.newsWidget.width;
 
       if (!hasAllSettings) {
         const defaultSettings: Settings = {
-          profile: {
+          layout: {
             margin: {
               top: 0,
               bottom: 0,
               left: 0,
               right: 0,
             },
+          },
+          stockWidget: {
             stockSymbol: 'AMC',
             showStockWidget: true,
+          },
+          newsWidget: {
+            width: 540,
           },
         };
 
