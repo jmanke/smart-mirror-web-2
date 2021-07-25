@@ -35,6 +35,12 @@ export default class SmartMirror extends Component<SmartMirrorArgs> {
     return htmlSafe(style);
   }
 
+  get newsWidgetStyle() {
+    const width = `width: ${this.settings?.newsWidget.width}px`;
+
+    return htmlSafe(width);
+  }
+
   constructor(owner: any, args: SmartMirrorArgs) {
     super(owner, args);
 
@@ -47,14 +53,13 @@ export default class SmartMirror extends Component<SmartMirrorArgs> {
       this.settings = await this.storeService.getAppSettings();
       this.autoUpdater.startCheckingForUpdates();
 
-      console.log(this.settings);
-
       const hasAllSettings =
         this.settings &&
         this.settings.layout &&
         this.settings.layout.margin &&
         this.settings.stockWidget.showStockWidget &&
-        this.settings.stockWidget.stockSymbol;
+        this.settings.stockWidget.stockSymbol &&
+        this.settings.newsWidget.width;
 
       if (!hasAllSettings) {
         const defaultSettings: Settings = {
@@ -69,6 +74,9 @@ export default class SmartMirror extends Component<SmartMirrorArgs> {
           stockWidget: {
             stockSymbol: 'AMC',
             showStockWidget: true,
+          },
+          newsWidget: {
+            width: 540,
           },
         };
 

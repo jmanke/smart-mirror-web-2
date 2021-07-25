@@ -14,9 +14,14 @@ export interface StockWidget {
   stockSymbol: string;
 }
 
+export interface NewsWidget {
+  width: number;
+}
+
 export interface Settings {
   layout: Layout;
   stockWidget: StockWidget;
+  newsWidget: NewsWidget;
 }
 
 // DO NOT DELETE: this is how TypeScript knows how to look up your models.

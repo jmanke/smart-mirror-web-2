@@ -8,7 +8,6 @@ interface SettingsStockSettingsArgs {
   stockWidget: StockWidget;
   // eslint-disable-next-line no-unused-vars
   onUpdateStockWidget: (stockWidget: StockWidget) => void;
-  onSave: () => void;
 }
 
 export default class SettingsStockSettingsIndex extends Component<SettingsStockSettingsArgs> {
