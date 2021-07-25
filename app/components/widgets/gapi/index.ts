@@ -15,10 +15,8 @@ export default class WidgetsGapiIndex extends Component<WidgetsGapiIndexArgs> {
 
   heartBeat: HeartBeat | undefined;
 
-  @tracked
-  items: [] = [];
-  @tracked
-  isConnected = true;
+  @tracked items: [] = [];
+  @tracked isConnected = true;
 
   get anyItems() {
     return !!this.items.length;

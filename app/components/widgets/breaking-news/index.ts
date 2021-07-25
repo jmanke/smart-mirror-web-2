@@ -4,12 +4,20 @@ import NewsApiService, {
   NewsResult,
 } from 'smart-mirror-desktop/services/news-api-service';
 import { tracked } from '@glimmer/tracking';
-import { later, next } from '@ember/runloop';
+import { next } from '@ember/runloop';
+import HeartBeatService, {
+  HeartBeat,
+} from 'smart-mirror-desktop/services/heart-beat-service';
 
 interface WidgetsBreakingNewsArgs {}
 
 export default class WidgetsBreakingNews extends Component<WidgetsBreakingNewsArgs> {
   @service declare newsApiService: NewsApiService;
+  @service declare heartBeatService: HeartBeatService;
+
+  getNewsBeat: HeartBeat | undefined;
+  nextNewsItemBeat: HeartBeat | undefined;
+
   @tracked newsResults: NewsResult[] = [];
   @tracked currentNewsItemIndex = 0;
 
@@ -20,7 +28,26 @@ export default class WidgetsBreakingNews extends Component<WidgetsBreakingNewsAr
   constructor(owner: any, args: WidgetsBreakingNewsArgs) {
     super(owner, args);
 
-    this.test();
+    const initialize = async () => {
+      this.getNewsBeat = this.heartBeatService.startHeartbeat(
+        async () => {
+          const newsResults = await this.newsApiService.getTopNews();
+          this.newsResults = newsResults?.filter((x) => !!x.description) ?? [];
+        },
+        1000 * 60 * 30,
+        true
+      );
+
+      this.nextNewsItemBeat = this.heartBeatService.startHeartbeat(
+        async () => {
+          this.nextNewsItem();
+        },
+        1000 * 60,
+        true
+      );
+    };
+
+    initialize();
   }
 
   nextNewsItem() {
@@ -35,17 +62,25 @@ export default class WidgetsBreakingNews extends Component<WidgetsBreakingNewsAr
     next(() => {
       this.currentNewsItemIndex = nextIndex;
     });
-
-    later(() => {
-      this.nextNewsItem();
-    }, 50000);
   }
 
-  async test() {
-    console.log('test');
-    this.newsResults = await this.newsApiService.getTopNews();
-    console.log(this.newsResults);
+  filterNewsResults(newsResults: NewsResult[]) {
+    if (!newsResults) {
+      return [];
+    }
 
-    this.nextNewsItem();
+    return newsResults.filter((x) => !!x.description);
+  }
+
+  willDestroy() {
+    super.willDestroy();
+
+    if (this.getNewsBeat) {
+      this.heartBeatService.stopHeartbeat(this.getNewsBeat);
+    }
+
+    if (this.nextNewsItemBeat) {
+      this.heartBeatService.stopHeartbeat(this.nextNewsItemBeat);
+    }
   }
 }
