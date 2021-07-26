@@ -5,8 +5,12 @@
 @import 'ember-modal-dialog/ember-modal-structure.css';
 @import 'ember-modal-dialog/ember-modal-appearance.css';
 
+:root {
+  --root-font-size: 1.2rem;
+}
+
 html {
-  font-size: 1.2rem;
+  font-size: var(--root-font-size);
 }
 
 body {

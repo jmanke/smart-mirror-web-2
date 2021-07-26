@@ -1,36 +1,46 @@
 <div class="flex flex-col justify-between" ...attributes>
-  <div class="flex flex-col">
-    <label>
-      Margin left
-    </label>
-    <Settings::LayoutSettings::InputMargin
-      @margin={{@layout.margin}}
-      @direction="left"
-      @onChange={{this.handleMarginChange}}
-    />
-    <label>
-      Margin top
-    </label>
-    <Settings::LayoutSettings::InputMargin
-      @margin={{@layout.margin}}
-      @direction="top"
-      @onChange={{this.handleMarginChange}}
-    />
-    <label>
-      Margin right
-    </label>
-    <Settings::LayoutSettings::InputMargin
-      @margin={{@layout.margin}}
-      @direction="right"
-      @onChange={{this.handleMarginChange}}
-    />
-    <label>
-      Margin bottom
-    </label>
-    <Settings::LayoutSettings::InputMargin
-      @margin={{@layout.margin}}
-      @direction="bottom"
-      @onChange={{this.handleMarginChange}}
-    />
-  </div>
+  <label>
+    Font Size
+  </label>
+  <input
+    class="border border-gray-500 pl-1"
+    type="number"
+    min="10"
+    defaultValue={{this.fontSize}}
+    step="0.5"
+    required
+    {{on 'change' (action this.handleFontSizeChange value='target.value')}}
+  />
+  <label>
+    Margin left
+  </label>
+  <Settings::LayoutSettings::InputMargin
+    @margin={{@layout.margin}}
+    @direction="left"
+    @onChange={{this.handleMarginChange}}
+  />
+  <label>
+    Margin top
+  </label>
+  <Settings::LayoutSettings::InputMargin
+    @margin={{@layout.margin}}
+    @direction="top"
+    @onChange={{this.handleMarginChange}}
+  />
+  <label>
+    Margin right
+  </label>
+  <Settings::LayoutSettings::InputMargin
+    @margin={{@layout.margin}}
+    @direction="right"
+    @onChange={{this.handleMarginChange}}
+  />
+  <label>
+    Margin bottom
+  </label>
+  <Settings::LayoutSettings::InputMargin
+    @margin={{@layout.margin}}
+    @direction="bottom"
+    @onChange={{this.handleMarginChange}}
+  />
 </div>

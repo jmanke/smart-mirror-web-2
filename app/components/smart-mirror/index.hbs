@@ -1,5 +1,8 @@
 {{#if this.settings}}
-  <div class="w-screen h-screen m-0 p-0">
+  <div
+    class="w-screen h-screen m-0 p-0"
+    {{did-update this.updateFontSize this.settings}}
+  >
     <div class="absolute flex" style={{this.profileMarginStyle}}>
       <div class="absolute top-0 left-0 flex flex-col">
         <Ui::FadeIn>

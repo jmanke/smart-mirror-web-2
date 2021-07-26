@@ -7,6 +7,7 @@ export interface Margin {
 
 export interface Layout {
   margin: Margin;
+  fontSize: string;
 }
 
 export interface StockWidget {

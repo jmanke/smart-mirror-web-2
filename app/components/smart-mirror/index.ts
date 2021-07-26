@@ -13,6 +13,8 @@ interface SmartMirrorArgs {
   onCancel: () => void;
 }
 
+const DEFAULT_FONT_SIZE = '19px';
+
 export default class SmartMirror extends Component<SmartMirrorArgs> {
   @service declare storeService: StoreService;
   @service declare autoUpdater: AutoUpdater;
@@ -70,6 +72,7 @@ export default class SmartMirror extends Component<SmartMirrorArgs> {
               left: 0,
               right: 0,
             },
+            fontSize: DEFAULT_FONT_SIZE,
           },
           stockWidget: {
             stockSymbol: 'AMC',
@@ -86,6 +89,19 @@ export default class SmartMirror extends Component<SmartMirrorArgs> {
     };
 
     load();
+  }
+
+  @action
+  updateFontSize() {
+    const root = document.documentElement;
+    const rootFontSize = root.style.getPropertyValue('--root-font-size');
+
+    if (rootFontSize !== this.settings?.layout.fontSize) {
+      root.style.setProperty(
+        '--root-font-size',
+        this.settings?.layout.fontSize ?? DEFAULT_FONT_SIZE
+      );
+    }
   }
 
   @action
