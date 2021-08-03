@@ -2,7 +2,7 @@ import Service, { inject as service } from '@ember/service';
 import ApiService from './api-service';
 import HeartBeatService, { HeartBeat } from './heart-beat-service';
 
-const UPDATE_INTERVAL = 1000 * 10;
+const UPDATE_INTERVAL = 1000 * 60 * 60;
 
 export default class AutoUpdater extends Service {
   @service declare apiService: ApiService;
