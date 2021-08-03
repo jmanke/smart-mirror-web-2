@@ -23,3 +23,7 @@ body {
 .animation-fill-forward {
   animation-fill-mode: forwards;
 }
+
+.max-w-56 {
+  max-width: 14rem;
+}

@@ -1,11 +1,11 @@
 <Ui::FadeIn ...attributes>
   {{#if (and this.isConnected this.location)}}
     {{#if this.currentWeather}}
-      <div class="flex space-x-14">
-        <div>
-          <Ui::Title>
+      <div class="flex space-x-9">
+        <div class="max-w-56">
+          <p class="text-3xl">
             {{title this.currentWeather.condition}}
-          </Ui::Title>
+          </p>
           <Widgets::Weather::InfoItem
             @title="Feels like"
             @value={{temp this.currentWeather.feelsLike}}
@@ -19,7 +19,7 @@
             @value={{mph this.currentWeather.wind}}
           />
         </div>
-        <div>
+        <div class="max-w-xs">
           <div class="flex space-x-3">
             <img
               class="h-19 self-center"
