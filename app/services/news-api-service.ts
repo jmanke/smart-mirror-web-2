@@ -3,7 +3,7 @@ import Api, { LOCAL_SERVER_URL } from './api-service';
 
 interface NewsResponse {
   status: string;
-  results: NewsResult[];
+  articles: NewsResult[];
   totalResults: number;
 }
 
@@ -20,7 +20,7 @@ export default class NewsApiService extends Service {
       `${LOCAL_SERVER_URL}/news/top`
     );
 
-    return news?.results ?? [];
+    return news?.articles ?? [];
   }
 }
 

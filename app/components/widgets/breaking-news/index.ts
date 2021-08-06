@@ -34,7 +34,7 @@ export default class WidgetsBreakingNews extends Component<WidgetsBreakingNewsAr
           const newsResults = await this.newsApiService.getTopNews();
           this.newsResults = newsResults?.filter((x) => !!x.description) ?? [];
         },
-        1000 * 60 * 30,
+        1000 * 60 * 60,
         true
       );
 
