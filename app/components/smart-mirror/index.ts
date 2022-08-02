@@ -7,6 +7,7 @@ import StoreService from 'smart-mirror-desktop/services/store-service';
 import { htmlSafe } from '@ember/string';
 import { wait } from 'smart-mirror-desktop/utils/utils';
 import AutoUpdater from 'smart-mirror-desktop/services/auto-updater';
+import { convertSettings } from 'smart-mirror-desktop/helpers/settings-converter';
 
 interface SmartMirrorArgs {
   onSave: () => void;
@@ -52,40 +53,10 @@ export default class SmartMirror extends Component<SmartMirrorArgs> {
         await wait(500);
       }
 
-      this.settings = await this.storeService.getAppSettings();
+      const settings = await this.storeService.getAppSettings();
+      this.settings = convertSettings(settings);
+      this.handleSettingsSave();
       this.autoUpdater.startCheckingForUpdates();
-
-      const hasAllSettings =
-        this.settings &&
-        this.settings.layout &&
-        this.settings.layout.margin &&
-        this.settings.stockWidget.showStockWidget &&
-        this.settings.stockWidget.stockSymbol &&
-        this.settings.newsWidget.width;
-
-      if (!hasAllSettings) {
-        const defaultSettings: Settings = {
-          layout: {
-            margin: {
-              top: 0,
-              bottom: 0,
-              left: 0,
-              right: 0,
-            },
-            fontSize: DEFAULT_FONT_SIZE,
-          },
-          stockWidget: {
-            stockSymbol: 'AMC',
-            showStockWidget: true,
-          },
-          newsWidget: {
-            width: 540,
-          },
-        };
-
-        this.settings = { ...defaultSettings, ...this.settings };
-        this.handleSettingsSave();
-      }
     };
 
     load();

@@ -12,7 +12,7 @@
             @delay={{200}}
             class="col-start-1 col-end-9"
           >
-            <p class="whitespace-nowrap overflow-hidden overflow-ellipsis">
+            <p>
               {{event.summary}}
             </p>
           </Ui::FadeInListItem>
@@ -28,7 +28,7 @@
           </Ui::FadeInListItem>
         {{/each}}
       {{else}}
-        <p class="whitespace-nowrap overflow-hidden overflow-ellipsis">
+        <p>
           No events...
         </p>
       {{/if}}

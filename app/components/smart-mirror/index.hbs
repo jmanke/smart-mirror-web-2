@@ -1,40 +1,42 @@
 {{#if this.settings}}
   <div
-    class="w-screen h-screen m-0 p-0"
+    class='w-screen h-screen m-0 p-0'
     {{did-update this.updateFontSize this.settings}}
   >
-    <div class="absolute flex" style={{this.profileMarginStyle}}>
-      <div class="absolute top-0 left-0 flex flex-col">
+    <div class='absolute flex' style={{this.profileMarginStyle}}>
+      <div class='absolute top-0 left-0 flex flex-col'>
         <Ui::FadeIn>
           <Widgets::DateTime />
         </Ui::FadeIn>
-        <Ui::FadeIn class="mt-12" style={{this.newsWidgetStyle}}>
+        <Ui::FadeIn class='mt-12' style={{this.newsWidgetStyle}}>
           <Widgets::BreakingNews />
         </Ui::FadeIn>
       </div>
       {{! Disabled google api widget until app is verified }}
-      {{!-- <div class="absolute bottom-0 left-0 flex space-x-20 h-96">
-        <Ui::FadeIn>
-          <Widgets::Events @maxEvents={{10}} class="max-w-xs" />
-        </Ui::FadeIn>
-        <Ui::FadeIn>
-          <Widgets::Tasks @maxTasks={{10}} class="max-w-xs" />
-        </Ui::FadeIn>
-      </div> --}}
-      <Ui::FadeIn class="absolute top-0 right-0">
+      {{#if this.settings.googleWidget.visible}}
+        <div class='absolute bottom-0 left-0 flex space-x-20 h-96'>
+          <Ui::FadeIn>
+            <Widgets::Events @maxEvents={{10}} class='max-w-xs' />
+          </Ui::FadeIn>
+          <Ui::FadeIn>
+            <Widgets::Tasks @maxTasks={{10}} class='max-w-xs' />
+          </Ui::FadeIn>
+        </div>
+      {{/if}}
+      <Ui::FadeIn class='absolute top-0 right-0'>
         <Widgets::Weather />
       </Ui::FadeIn>
       {{#if this.settings.stockWidget.showStockWidget}}
-        <Ui::FadeIn class="absolute bottom-0 right-0">
+        <Ui::FadeIn class='absolute bottom-0 right-0'>
           <Widgets::StockChart
-            class="w-120"
+            class='w-120'
             @stockSymbol={{this.settings.stockWidget.stockSymbol}}
           />
         </Ui::FadeIn>
       {{/if}}
       {{#if this.settings}}
         <Settings
-          class="w-full h-full"
+          class='w-full h-full'
           @settings={{this.settings}}
           @onSave={{this.handleSettingsSave}}
           @onUpdate={{this.handleSettingsUpdate}}

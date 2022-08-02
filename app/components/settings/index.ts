@@ -6,6 +6,7 @@ import {
   Layout,
   StockWidget,
   NewsWidget,
+  GoogleWidget,
 } from 'smart-mirror-desktop/models/settings';
 
 interface SettingsIndexArgs {
@@ -21,7 +22,12 @@ export default class SettingsIndex extends Component<SettingsIndexArgs> {
   @tracked selectedTab = 'Layout';
 
   prevSettings: Settings | undefined;
-  tabOptions = [{ label: 'Layout' }, { label: 'Stocks' }, { label: 'News' }];
+  tabOptions = [
+    { label: 'Layout' },
+    { label: 'Stocks' },
+    { label: 'News' },
+    { label: 'Google' },
+  ];
 
   @action
   updateLayout(layout: Layout) {
@@ -44,6 +50,14 @@ export default class SettingsIndex extends Component<SettingsIndexArgs> {
     this.args.onUpdate?.({
       ...this.args.settings,
       newsWidget,
+    });
+  }
+
+  @action
+  updateGoogleWidget(googleWidget: GoogleWidget) {
+    this.args.onUpdate?.({
+      ...this.args.settings,
+      googleWidget,
     });
   }
 
