@@ -30,7 +30,6 @@ before_install:
 script:
   - yarn test
 install:
-  - yarn set version berry
   - yarn install --non-interactive
   - cd electron-app && yarn install --non-interactive
   - export DISPLAY=':99.0'
