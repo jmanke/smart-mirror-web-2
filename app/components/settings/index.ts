@@ -1,12 +1,13 @@
+import { action } from '@ember/object';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
-import { action } from '@ember/object';
 import {
-  Settings,
-  Layout,
-  StockWidget,
-  NewsWidget,
   GoogleWidget,
+  Layout,
+  LocationSettings,
+  NewsWidget,
+  Settings,
+  StockWidget,
 } from 'smart-mirror-desktop/models/settings';
 
 interface SettingsIndexArgs {
@@ -27,6 +28,7 @@ export default class SettingsIndex extends Component<SettingsIndexArgs> {
     { label: 'Stocks' },
     { label: 'News' },
     { label: 'Google' },
+    { label: 'Location' },
   ];
 
   @action
@@ -58,6 +60,16 @@ export default class SettingsIndex extends Component<SettingsIndexArgs> {
     this.args.onUpdate?.({
       ...this.args.settings,
       googleWidget,
+    });
+  }
+
+  @action
+  updateLocation(location: LocationSettings) {
+    console.log(location);
+
+    this.args.onUpdate?.({
+      ...this.args.settings,
+      location,
     });
   }
 

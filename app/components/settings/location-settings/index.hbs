@@ -1,0 +1,32 @@
+<label>
+  City
+</label>
+<input
+  class="border border-gray-500 pl-1"
+  value={{@location.city}}
+  placeholder="Redlands"
+  required
+  {{on 'change' (action this.updateCity value='target.value')}}
+/>
+
+<label>
+  State
+</label>
+<input
+  class="border border-gray-500 pl-1"
+  value={{@location.state}}
+  placeholder="CA"
+  required
+  {{on 'change' (action this.updateState value='target.value')}}
+/>
+
+<label>
+  Country code
+</label>
+<input
+  class="border border-gray-500 pl-1"
+  value={{@location.country}}
+  placeholder="USA"
+  required
+  {{on 'change' (action this.updateCountry value='target.value')}}
+/>

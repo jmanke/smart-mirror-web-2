@@ -23,12 +23,19 @@ export interface NewsWidget {
   width: number;
 }
 
+export interface LocationSettings {
+  city: string;
+  state: string;
+  country: string;
+}
+
 export interface Settings {
   version: number;
   layout: Layout;
   stockWidget: StockWidget;
   newsWidget: NewsWidget;
   googleWidget: GoogleWidget;
+  location: LocationSettings;
 }
 
 // DO NOT DELETE: this is how TypeScript knows how to look up your models.

@@ -28,3 +28,12 @@
 electron-app/src/node-api/credentials.json
 electron-app/src/node-api/app-settings.json
 electron-app/src/node-api/token.json
+
+# yarn2
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions

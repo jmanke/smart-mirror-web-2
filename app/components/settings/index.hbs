@@ -52,6 +52,12 @@
                   @onUpdateGoogleWidget={{this.updateGoogleWidget}}
                 />
               {{/if}}
+              {{#if (eq this.selectedTab 'Location')}}
+                <Settings::LocationSettings
+                  @location={{@settings.location}}
+                  @onUpdateLocation={{this.updateLocation}}
+                />
+              {{/if}}
             {{/if}}
           </div>
           <div class='ml-auto mt-auto'>

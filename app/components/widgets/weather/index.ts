@@ -73,7 +73,7 @@ export default class WidgetsWeatherIndex extends Component<WidgetsWeatherIndexAr
     super(owner, args);
 
     const initialize = async () => {
-      this.location = await this.locationService.getLocation();
+      this.location =  await this.locationService.getLocation();
 
       // current weather
       this.currentWeatherHeartBeat = this.heartBeatService.startHeartbeat(

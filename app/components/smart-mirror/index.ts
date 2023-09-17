@@ -1,13 +1,13 @@
-import Component from '@glimmer/component';
-import { inject as service } from '@ember/service';
-import { Settings } from 'smart-mirror-desktop/models/settings';
 import { action } from '@ember/object';
-import { tracked } from '@glimmer/tracking';
-import StoreService from 'smart-mirror-desktop/services/store-service';
+import { inject as service } from '@ember/service';
 import { htmlSafe } from '@ember/string';
-import { wait } from 'smart-mirror-desktop/utils/utils';
-import AutoUpdater from 'smart-mirror-desktop/services/auto-updater';
+import Component from '@glimmer/component';
+import { tracked } from '@glimmer/tracking';
 import { convertSettings } from 'smart-mirror-desktop/helpers/settings-converter';
+import { Settings } from 'smart-mirror-desktop/models/settings';
+import AutoUpdater from 'smart-mirror-desktop/services/auto-updater';
+import StoreService from 'smart-mirror-desktop/services/store-service';
+import { wait } from 'smart-mirror-desktop/utils/utils';
 
 interface SmartMirrorArgs {
   onSave: () => void;
@@ -77,6 +77,8 @@ export default class SmartMirror extends Component<SmartMirrorArgs> {
 
   @action
   handleSettingsUpdate(settings: Settings) {
+    console.log(settings);
+
     this.settings = settings;
   }
 
