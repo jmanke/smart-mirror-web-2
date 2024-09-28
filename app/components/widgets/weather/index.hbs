@@ -1,44 +1,47 @@
 <Ui::FadeIn ...attributes>
   {{#if (and this.isConnected this.location)}}
     {{#if this.currentWeather}}
-      <div class="flex space-x-9">
-        <div class="max-w-56">
-          <p class="text-3xl">
+      <div class='flex space-x-9'>
+        <div class='max-w-56'>
+          <p class='text-3xl'>
             {{title this.currentWeather.condition}}
           </p>
           <Widgets::Weather::InfoItem
-            @title="Feels like"
-            @value={{temp this.currentWeather.feelsLike}}
+            @title='High'
+            @value={{temp this.currentWeather.tempMax}}
           />
           <Widgets::Weather::InfoItem
-            @title="Humidity"
+            @title='Low'
+            @value={{temp this.currentWeather.tempMin}}
+          />
+          <Widgets::Weather::InfoItem
+            @title='Humidity'
             @value={{percent this.currentWeather.humidity}}
           />
           <Widgets::Weather::InfoItem
-            @title="Wind"
+            @title='Wind'
             @value={{mph this.currentWeather.wind}}
           />
         </div>
-        <div class="max-w-xs">
-          <div class="flex space-x-3">
+        <div class='max-w-xs'>
+          <div class='flex space-x-3'>
             <img
-              class="h-19 self-center"
+              class='h-19 self-center'
               src={{this.currentWeather.icon}}
               alt={{this.currentWeather.condition}}
             />
-            <p class="text-7xl">
+            <p class='text-7xl'>
               {{temp this.currentWeather.currentTemp}}
             </p>
           </div>
           <Ui::Title>
-            {{this.location.city}}
-            ,
+            {{this.location.city}},
             {{state-abbrev this.location.state}}
           </Ui::Title>
         </div>
       </div>
     {{/if}}
-    <div class="py-5"></div>
+    <div class='py-5'></div>
     {{#if this.dailyForecast}}
       {{#each this.dailyForecast as |daily index|}}
         <Ui::FadeInListItem
@@ -49,7 +52,7 @@
         >
           <Widgets::Weather::DailyForecast
             @dailyForecast={{daily}}
-            class="py-1"
+            class='py-1'
           />
         </Ui::FadeInListItem>
       {{/each}}

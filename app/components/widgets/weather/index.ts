@@ -1,18 +1,20 @@
+import { inject as service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
-import { inject as service } from '@ember/service';
-import OpenWeatherApiService from 'smart-mirror-desktop/services/open-weather-api-service';
-import LocationService, {
-  Location,
-} from 'smart-mirror-desktop/services/location-service';
 import HeartBeatService, {
   HeartBeat,
 } from 'smart-mirror-desktop/services/heart-beat-service';
+import LocationService, {
+  Location,
+} from 'smart-mirror-desktop/services/location-service';
+import OpenWeatherApiService from 'smart-mirror-desktop/services/open-weather-api-service';
 
 interface WidgetsWeatherIndexArgs {}
 
 interface CurrentWeatherData {
   currentTemp: number;
+  tempMin: number;
+  tempMax: number;
   condition: string;
   feelsLike: number;
   humidity: number;
@@ -73,7 +75,7 @@ export default class WidgetsWeatherIndex extends Component<WidgetsWeatherIndexAr
     super(owner, args);
 
     const initialize = async () => {
-      this.location =  await this.locationService.getLocation();
+      this.location = await this.locationService.getLocation();
 
       // current weather
       this.currentWeatherHeartBeat = this.heartBeatService.startHeartbeat(
@@ -90,6 +92,8 @@ export default class WidgetsWeatherIndex extends Component<WidgetsWeatherIndexAr
 
           this.currentWeather = {
             currentTemp: Math.round(currentWeather.main.temp),
+            tempMin: Math.round(currentWeather.main.temp_min),
+            tempMax: Math.round(currentWeather.main.temp_max),
             condition: currentWeather.weather[0].description,
             feelsLike: Math.round(currentWeather.main.feels_like),
             humidity: Math.round(currentWeather.main.humidity),
