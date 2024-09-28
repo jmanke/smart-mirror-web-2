@@ -6,14 +6,16 @@
           <p class='text-3xl'>
             {{title this.currentWeather.condition}}
           </p>
-          <Widgets::Weather::InfoItem
-            @title='High'
-            @value={{temp this.currentWeather.tempMax}}
-          />
-          <Widgets::Weather::InfoItem
-            @title='Low'
-            @value={{temp this.currentWeather.tempMin}}
-          />
+          {{#if this.currentDayForecast}}
+            <Widgets::Weather::InfoItem
+              @title='High'
+              @value={{temp this.currentDayForecast.tempMax}}
+            />
+            <Widgets::Weather::InfoItem
+              @title='Low'
+              @value={{temp this.currentDayForecast.tempMin}}
+            />
+          {{/if}}
           <Widgets::Weather::InfoItem
             @title='Humidity'
             @value={{percent this.currentWeather.humidity}}

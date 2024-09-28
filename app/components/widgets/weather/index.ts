@@ -11,10 +11,13 @@ import OpenWeatherApiService from 'smart-mirror-desktop/services/open-weather-ap
 
 interface WidgetsWeatherIndexArgs {}
 
-interface CurrentWeatherData {
-  currentTemp: number;
+interface CurrentDayForecast {
   tempMin: number;
   tempMax: number;
+}
+
+interface CurrentWeatherData {
+  currentTemp: number;
   condition: string;
   feelsLike: number;
   humidity: number;
@@ -67,6 +70,8 @@ export default class WidgetsWeatherIndex extends Component<WidgetsWeatherIndexAr
   @tracked
   currentWeather: CurrentWeatherData | undefined;
   @tracked
+  currentDayForecast: CurrentDayForecast | undefined;
+  @tracked
   isConnected = true;
   @tracked
   location: Location | undefined;
@@ -92,8 +97,6 @@ export default class WidgetsWeatherIndex extends Component<WidgetsWeatherIndexAr
 
           this.currentWeather = {
             currentTemp: Math.round(currentWeather.main.temp),
-            tempMin: Math.round(currentWeather.main.temp_min),
-            tempMax: Math.round(currentWeather.main.temp_max),
             condition: currentWeather.weather[0].description,
             feelsLike: Math.round(currentWeather.main.feels_like),
             humidity: Math.round(currentWeather.main.humidity),
@@ -122,6 +125,11 @@ export default class WidgetsWeatherIndex extends Component<WidgetsWeatherIndexAr
           if (!this.isConnected) {
             this.isConnected = true;
           }
+
+          this.currentDayForecast = {
+            tempMin: Math.round(dailyForecast.daily[0].temp.min),
+            tempMax: Math.round(dailyForecast.daily[0].temp.max),
+          };
 
           this.dailyForecast = dailyForecast.daily
             .slice(1, FORECAST_NUM + 1)
