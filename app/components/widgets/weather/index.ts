@@ -105,7 +105,7 @@ export default class WidgetsWeatherIndex extends Component<WidgetsWeatherIndexAr
             icon: weatherIcons[currentWeather.weather[0].icon],
           };
         },
-        1000 * 60 * 5,
+        1000 * 60 * 10,
         true
       );
 
