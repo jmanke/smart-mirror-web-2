@@ -1,5 +1,5 @@
-import Component from '@glimmer/component';
 import { action } from '@ember/object';
+import Component from '@glimmer/component';
 import { Margin } from 'smart-mirror-desktop/models/settings';
 
 interface SettingsProfileInputMarginIndexArgs {
@@ -26,8 +26,8 @@ export default class SettingsProfileInputMarginIndex extends Component<SettingsP
   }
 
   @action
-  handleValueChange(val: string) {
-    let num = parseInt(val);
+  handleValueChange(e: Event) {
+    let num = parseInt((e.target as HTMLInputElement).value);
 
     if (isNaN(num) || num < 0) {
       num = 0;

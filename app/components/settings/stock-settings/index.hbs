@@ -6,7 +6,7 @@
   type="text"
   value={{@stockWidget.stockSymbol}}
   required
-  {{on 'change' (action this.handleStockSymbolChange value='target.value')}}
+  {{on 'change' this.handleStockSymbolChange}}
 />
 <div class="flex pt-2">
   <input
@@ -15,7 +15,7 @@
     value={{@stockWidget.showStockWidget}}
     checked={{@stockWidget.showStockWidget}}
     required
-    {{on 'click' (action this.handleShowStockWidgetChange)}}
+    {{on 'click' this.handleShowStockWidgetChange}}
   />
   <label class="pl-2">
     Show Stock Widget

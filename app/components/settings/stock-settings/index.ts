@@ -1,8 +1,8 @@
-import Component from '@glimmer/component';
 import { action } from '@ember/object';
+import { inject as service } from '@ember/service';
+import Component from '@glimmer/component';
 import { StockWidget } from 'smart-mirror-desktop/models/settings';
 import StockApiService from 'smart-mirror-desktop/services/stock-api-service';
-import { inject as service } from '@ember/service';
 
 interface SettingsStockSettingsArgs {
   stockWidget: StockWidget;
@@ -14,7 +14,8 @@ export default class SettingsStockSettingsIndex extends Component<SettingsStockS
   @service declare stockApiService: StockApiService;
 
   @action
-  async handleStockSymbolChange(stockSymbol: string) {
+  async handleStockSymbolChange(e: Event) {
+    const stockSymbol = (e.target as HTMLInputElement).value;
     try {
       // check if stock is valid
       await this.stockApiService.getIntradayStockInfo(stockSymbol, {

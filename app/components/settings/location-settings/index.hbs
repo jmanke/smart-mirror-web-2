@@ -6,7 +6,7 @@
   value={{@location.city}}
   placeholder="Redlands"
   required
-  {{on 'change' (action this.updateCity value='target.value')}}
+  {{on 'change' this.updateCity }}
 />
 
 <label>
@@ -17,7 +17,7 @@
   value={{@location.state}}
   placeholder="CA"
   required
-  {{on 'change' (action this.updateState value='target.value')}}
+  {{on 'change' this.updateState}}
 />
 
 <label>
@@ -28,5 +28,5 @@
   value={{@location.country}}
   placeholder="USA"
   required
-  {{on 'change' (action this.updateCountry value='target.value')}}
+  {{on 'change' this.updateCountry}}
 />

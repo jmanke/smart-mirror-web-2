@@ -10,26 +10,26 @@ interface SettingsLocationSettingsArgs {
 
 export default class SettingsLocationSettingsIndex extends Component<SettingsLocationSettingsArgs> {
   @action
-  updateCity(city: string) {
+  updateCity(e: Event) {
     this.args.onUpdateLocation?.({
       ...this.args.location,
-      city,
+      city: (e.target as HTMLInputElement).value,
     });
   }
 
   @action
-  updateState(state: string) {
+  updateState(e: Event) {
     this.args.onUpdateLocation?.({
       ...this.args.location,
-      state,
+      state: (e.target as HTMLInputElement).value,
     });
   }
 
   @action
-  updateCountry(country: string) {
+  updateCountry(e: Event) {
     this.args.onUpdateLocation?.({
       ...this.args.location,
-      country,
+      country: (e.target as HTMLInputElement).value,
     });
   }
 }

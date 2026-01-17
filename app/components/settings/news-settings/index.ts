@@ -1,5 +1,5 @@
-import Component from '@glimmer/component';
 import { action } from '@ember/object';
+import Component from '@glimmer/component';
 import { NewsWidget } from 'smart-mirror-desktop/models/settings';
 
 interface SettingsNewsSettingsArgs {
@@ -10,10 +10,10 @@ interface SettingsNewsSettingsArgs {
 
 export default class SettingsNewsSettingsIndex extends Component<SettingsNewsSettingsArgs> {
   @action
-  updateWidth(width: string) {
+  updateWidth(e: Event) {
     this.args.onUpdateNewsWidget({
       ...this.args.newsWidget,
-      width: parseInt(width),
+      width: parseInt((e.target as HTMLInputElement).value),
     });
   }
 }

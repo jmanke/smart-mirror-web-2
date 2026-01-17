@@ -1,6 +1,6 @@
-import Component from '@glimmer/component';
 import { action } from '@ember/object';
-import { Margin, Layout } from 'smart-mirror-desktop/models/settings';
+import Component from '@glimmer/component';
+import { Layout, Margin } from 'smart-mirror-desktop/models/settings';
 
 interface SettingsLayoutSettingsIndexArgs {
   layout: Layout;
@@ -9,7 +9,7 @@ interface SettingsLayoutSettingsIndexArgs {
 }
 
 const MIN_FONT_SIZE = 10;
-const MAX_FONT_SIZE = 32;
+const MAX_FONT_SIZE = 96;
 
 export default class SettingsLayoutSettingsIndex extends Component<SettingsLayoutSettingsIndexArgs> {
   get fontSize() {
@@ -28,8 +28,8 @@ export default class SettingsLayoutSettingsIndex extends Component<SettingsLayou
   }
 
   @action
-  handleFontSizeChange(fontSize: string) {
-    let size = parseInt(fontSize);
+  handleFontSizeChange(e: Event) {
+    let size = parseInt((e.target as HTMLInputElement).value);
 
     if (size < MIN_FONT_SIZE) {
       size = MIN_FONT_SIZE;

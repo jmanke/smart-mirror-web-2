@@ -9,7 +9,7 @@
     defaultValue={{this.fontSize}}
     step="1"
     required
-    {{on 'change' (action this.handleFontSizeChange value='target.value')}}
+    {{on 'change' this.handleFontSizeChange}}
   />
   <label>
     Margin left

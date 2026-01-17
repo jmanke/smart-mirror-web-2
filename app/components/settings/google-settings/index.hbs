@@ -5,7 +5,7 @@
     value={{@googleWidget.visible}}
     checked={{@googleWidget.visible}}
     required
-    {{on 'click' (action this.handleGoogleWidgetVisibleChange)}}
+    {{on 'click' this.handleGoogleWidgetVisibleChange}}
   />
   <label class="pl-2">
     Show Google Widget

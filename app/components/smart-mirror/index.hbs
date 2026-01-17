@@ -1,6 +1,7 @@
 {{#if this.settings}}
   <div
     class='w-screen h-screen m-0 p-0'
+    {{did-insert this.updateFontSize}}
     {{did-update this.updateFontSize this.settings}}
   >
     <div class='absolute flex' style={{this.profileMarginStyle}}>
